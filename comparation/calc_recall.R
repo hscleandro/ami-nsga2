@@ -35,7 +35,7 @@ library(COSINE)
 ## Address of simulated Robinson data in .mat
 SIMULATED_DATA <- '/home/leandro/Data/Robinson/btx244-suppl_data/Robinson.121.sup.2/supplementary_material_code_and_data/simulateddata.mat'
 ## Directory indicating the address of the modules obtained by the AMI-NSGAII tool
-FILES_PATH <- '/home/leandro/Data/table_module/'
+FILES_PATH <- '/home/leandro/Data/nsga2_module3/table_module/'
 ## output file of the recall results of each tool
 OUTPUT_PATH <- '/home/leandro/Data/nsga2_module3/COSINE/final_results_test3.csv'
 
@@ -83,6 +83,7 @@ for(j in set){
 }
 
 size_dataset <- length(size_final)
+knode_recall <- NULL; bionet_recall <- NULL
 ## Identifying the Bionet and Knode recall based on Robinson's (2017) results
 for(set in 1:size_dataset){
   max <- size_final[set]
@@ -94,13 +95,13 @@ for(set in 1:size_dataset){
   truehits <- which(truehits == 1)
   ## calculating the Knode recall
   tp_knode <- length(intersect(knoderesults,truehits))
-  knode_recall <- tp_knode / length(truehits)
+  knode_recall[set] <- tp_knode / length(truehits)
   ## Bionet results 
   bionetresults <- data_sim$overall.bionetresults[,set]
   bionetresults <- which(bionetresults == 1)
   ## calculating the Bionet recall
   tp_bionet <- length(intersect(bionetresults,truehits))
-  bionet_recall <- tp_bionet / length(truehits)
+  bionet_recall[set] <- tp_bionet / length(truehits)
 }
 
 ## Identifying the COSINE recall based on Robinson's (2017) results
@@ -205,6 +206,7 @@ for(set in 1:size_dataset){
 cossine_recall <- cosine_results$recall
 
 recall_table <- cbind(aminsga2_recall,cossine_recall,knode_recall,bionet_recall)
-boxplot(recall_table)
+colnames(recall_table) <- c("AMI-NSGAII","COSSINE","Knode","Bionet")
+boxplot(recall_table, main = "50 simulations")
 
 write.csv(recall_table, file = OUTPUT_PATH, row.names = F)
