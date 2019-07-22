@@ -1,3 +1,31 @@
+#===================================================================================================
+#
+# AMI-NSGAII: New evolutionary operators for active modules identification
+#
+# AMI-NSGAII v0.1 (2019-07-22)  
+# Copyright 2019 Leandro Corrêa
+#
+# This file is part of AMI-NSGAII.
+#
+# This script compares the recall of the results to the tools:
+# - AMI-NSGAII
+# - Knode  (based in Robinson (2017) analisys)
+# - Bionet (based in Robinson (2017) analisys)
+# - COSINE
+#
+# The simulated data used are based on the work of Robinson (2017)
+# You can get the data in .mat format at this address: 
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5870666/bin/btx244_supp.zip
+#
+# REFERENCES
+#
+# Sean Robinson, Jaakko Nevalainen, Guillaume Pinna, Anna Campalans, J. 
+# PabloRadicella, and Laurent Guyon. 2017.  Incorporating interaction 
+# networks intothe determination of functionally related hit genes in 
+# genomic experimentswith Markov random fields.Bioinformatics (Oxford, 
+# England)33, 14 (jul 2017),i170–i179
+#===================================================================================================
+
 library(R.matlab)     # to upload the Robinson(2017) dataset
 library(dplyr)
 library(magrittr)
@@ -7,7 +35,7 @@ library(COSINE)
 ## Address of simulated Robinson data in .mat
 SIMULATED_DATA <- '/home/leandro/Data/Robinson/btx244-suppl_data/Robinson.121.sup.2/supplementary_material_code_and_data/simulateddata.mat'
 ## Directory indicating the address of the modules obtained by the AMI-NSGAII tool
-FILES_PATH <- '/home/leandro/Data/nsga2_module3/table_module/'
+FILES_PATH <- '/home/leandro/Data/table_module/'
 ## output file of the recall results of each tool
 OUTPUT_PATH <- '/home/leandro/Data/nsga2_module3/COSINE/final_results_test3.csv'
 
