@@ -1,8 +1,8 @@
 #===================================================================================================
 #
-# AMI-NSGAII: New evolutionary operators for active modules identification
+# AMI-NSGAII: Population-based meta-heuristic for active modulesidentification
 #
-# AMI-NSGAII v0.1 (2019-07-22)  
+# AMI-NSGAII v0.1 (2019-07-25)  
 # Copyright 2019 Leandro Corrêa
 #
 # This file is part of AMI-NSGAII.
@@ -26,6 +26,7 @@
 # England)33, 14 (jul 2017),i170–i179
 #===================================================================================================
 
+## It is important to install these libraries before they run.
 library(R.matlab)     # to upload the Robinson(2017) dataset
 library(dplyr)
 library(magrittr)
@@ -36,7 +37,7 @@ library(COSINE)
 SIMULATED_DATA <- '/home/leandro/Data/Robinson/btx244-suppl_data/Robinson.121.sup.2/supplementary_material_code_and_data/simulateddata.mat'
 ## Directory indicating the address of the modules obtained by the AMI-NSGAII tool
 FILES_PATH <- '/home/leandro/Data/nsga2_module3/table_module/'
-## output file of the recall results of each tool
+## Output file of the recall results of each tool
 OUTPUT_PATH <- '/home/leandro/Data/nsga2_module3/COSINE/final_results_test3.csv'
 
 data_sim <- readMat(SIMULATED_DATA)
@@ -62,7 +63,7 @@ for(f in files){
   k <- k + 1
   front_pareto %<>%
     filter(len == min(front_pareto$len))
-  ## keeping the modules unique
+  ## keeping the unique modules
   front_pareto <- front_pareto %>% distinct(za,nest,rnkIndex,len,hits,fp,fn,precision,Recall,F1)
   ## pick up the best module based on the za score.
   index <- which(front_pareto$za == max(front_pareto$za))
@@ -107,7 +108,7 @@ for(set in 1:size_dataset){
 ## Identifying the COSINE recall based on Robinson's (2017) results
 cosine_results <- NULL
 for(set in 1:size_dataset){
-  ## update Robinson (2017) data
+  ## Update Robinson (2017) data
   max <- size_final[set]
   matrix_adj <- data_sim$overall.adj[[set]]
   matrix_adj <- matrix_adj[[1]]
@@ -120,6 +121,8 @@ for(set in 1:size_dataset){
   names(truehits) <- rownames(matrix_adj)
   truehits <- names(which(truehits == 1))
   
+  ## Preprocessing data for COSINE tool execution
+
   ## Create ppi network ####
   ppi <- graph.adjacency(as.matrix(matrix_adj), weighted = NULL, mode = "directed")
   
@@ -186,6 +189,7 @@ for(set in 1:size_dataset){
     bsscore <- GA_result$Best_Scores
     if(bsscore > best_score){
       ## Best COSINE results 
+      ## We filter the best subnet results based on the lowest p-values of the transcriptomic data.
       index_min <- order(transcript[GA_result$Subnet], decreasing = F)[1:max]
       subnet <- GA_result$Subnet[index_min]
       tp <- length(intersect(subnet,as.numeric(truehits)))
