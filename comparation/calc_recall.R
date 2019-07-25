@@ -26,7 +26,7 @@
 # England)33, 14 (jul 2017),i170–i179
 #===================================================================================================
 
-## It is important to install these libraries before they run.
+## It is important to install these libraries before run this script
 library(R.matlab)     # to upload the Robinson(2017) dataset
 library(dplyr)
 library(magrittr)
