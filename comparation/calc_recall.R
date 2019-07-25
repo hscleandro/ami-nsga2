@@ -1,6 +1,6 @@
 #===================================================================================================
 #
-# AMI-NSGAII: Population-based meta-heuristic for active modulesidentification
+# AMI-NSGAII: Population-based meta-heuristic for active modules identification
 #
 # AMI-NSGAII v0.1 (2019-07-25)  
 # Copyright 2019 Leandro Corrêa
