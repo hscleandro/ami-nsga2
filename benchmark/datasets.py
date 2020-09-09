@@ -145,12 +145,12 @@ class Datasets:
     def get_scale_free_graph(nb_nodes: int, nb_initial_nodes: int, nb_seeds: int, nb_to_select: int, p_prob: float,
                              q_prob: float, rng: Random = None) -> nx.Graph:
         """
-        nb_nodes = 1000 # number of nodes
-        nb_initial_nodes = 1 # number of initial nodes
-        nb_seeds = 3 # umber of seed nodes
-        nb_to_select = 10 # number of selected nodes in a group
-        p_prob = 0.09 # probability to add an edge between existing nodes
-        q_prob = 0.04 # Probability value of rewiring of existing edges
+        nb_nodes: number of nodes
+        nb_initial_nodes: number of initial nodes
+        nb_seeds: umber of seed nodes
+        nb_to_select: number of selected nodes in a group
+        p_prob: probability to add an edge between existing nodes
+        q_prob: Probability value of rewiring of existing edges
         """
 
         MODULE_SIZE = nb_to_select
@@ -252,13 +252,13 @@ class Datasets:
     def get_scale_free_graph_edge(nb_nodes: int, nb_initial_nodes: int, nb_seeds: int, nb_to_select: int, p_prob: float,
                                   q_prob: float, exc_edge, rng: Random = None) -> nx.Graph:
         """
-        nb_nodes = 1000 # number of nodes
-        nb_initial_nodes = 1 # number of initial nodes
-        nb_seeds = 3 # umber of seed nodes
-        nb_to_select = 10 # number of selected nodes in a group
-        p_prob = 0.09 # probability to add an edge between existing nodes
-        q_prob = 0.04 # Probability value of rewiring of existing edges
-        exc_edge = 0.2 # Percent of excluded edges
+        nb_nodes: number of nodes
+        nb_initial_nodes: number of initial nodes
+        nb_seeds: umber of seed nodes
+        nb_to_select: number of selected nodes in a group
+        p_prob: probability to add an edge between existing nodes
+        q_prob: Probability value of rewiring of existing edges
+        exc_edge: Percent of excluded edges
         """
 
         G = Datasets.get_scale_free_graph(nb_nodes, nb_initial_nodes, nb_seeds, nb_to_select, p_prob, q_prob, rng)

@@ -1,4 +1,43 @@
 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+    Script used for comparison (benchmark) between the tools for identification of active modules. 
+
+    The structure of the artificial networks used in this benchmark is made using as  
+    reference the study of (Barabási, 2000).  
+    The parameters bellow Can be defined by the user.
+
+    Density [-i];
+    Network size[-s]; 
+    Active module size [-m], 
+    Number of executions [-r];
+    Number of random removed edges (for null test estimation) [-d];
+    Probability to add an edge between existing nodes [-p]; and 
+    Probability value of rewiring of existing edges [-q]
+
+    Use the parameter m = 0 to execute a network structure based in real biological STRING dabase 
+    (combined_score > 700 and cooexpression > 0) from a approximation using linear regression.
+
+    The signal variation of the simulated genes was calculated using the same strategy as the study
+    made by (Robinson, 2017).
+
+    Four other state-of-the-art strategies (Bionet, GIGA, COSINE, Knode), as well as the baseline 
+    containing only the best values obtained by the signal variation, are analyzed. The 
+    hyperparameters and the selection of each tool are defined in the set_variables.json file.
+
+    Albert,  Réka  and  Albert-László  Barabási  (2000).  
+    “Topology  of  evolving  networks:local events and universality”. 
+    In:Physical review letters85.24, p. 5234.
+
+    Robinson, Sean et al. (2017). 
+    “Incorporating interaction networks into the determina-tion of 
+     functionally related hit genes in genomic experiments with Markov ran-dom fields.” 
+    In:Bioinformatics (Oxford, England)33.14, pp. i170–i179.ISSN: 1367-4811
+    
+"""
+
 from datasets import Datasets
 from scores import Scores
 import argparse

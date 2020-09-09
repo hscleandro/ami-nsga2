@@ -9,6 +9,11 @@
     
     A second group of functions measures the accuracy of a prediction given
     a predicted set of nodes and a set of nodes considered as ground truth 
+
+    The third group of functions obtains the results of the tools used for 
+    comparison (Knode, Bionet, Giga). The tools are run using the sys command. 
+    The scripts used to run each tool are in the tools directory.
+    
 """
 
 from sklearn import metrics
