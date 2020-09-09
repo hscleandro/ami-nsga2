@@ -1,0 +1,14 @@
+To perform some tests using AMINSGA-II:
+== ======= ==== ===== ===== ==========
+
+Robinson dataset: Rscript aminsga2.R --robinson --output /output_dir/ --cross (1 or 2)
+Example of simulated networks: Rscript aminsga2.R --testeDir ../dataset/teste_sim/ --output /output_dir/ --cross (1 or 2)
+Example of real network: Rscript aminsga2.R --net ../dataset/bio_test_matrix.csv --profile ../dataset/bio_test.csv --output /output_dir/ --cross (1 or 2)
+
+cross (1): Crossover used in the article "Population-based meta-heuristic for active modulesidentification".
+      (2): Adapted Breeder Genetic Crossover.
+
+To set the parameters of execution access config.json
+
+Problems with R library dependencie check: aminsga2_packages.R
+For more options use: Rscript aminsga2.R --help

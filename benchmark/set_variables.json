@@ -1,0 +1,15 @@
+{
+"tools":["bionet", "giga", "knode", "aminsga2"],
+"cosine_n_iter":1,
+"cosine_popSize":100,
+"bionet_fdrs":0.8,
+"aminsga2_number_of_generations": 1,
+"aminsga2_population_size": 100,
+"aminsga2_offspring_size": 0.7,
+"aminsga2_change_mutation_tax": 0.3,
+"aminsga2_deletion_mutation_tax": 0.08,
+"aminsga2_tournament": 4,
+"aminsga2_lower_range": 10,
+"aminsga2_upper_range": 30,
+"aminsga2_d_connection": 2
+}

@@ -1,0 +1,11 @@
+{
+"number_of_generations": 2,
+"population_size": 100,
+"offspring_size": 0.7,
+"change_mutation_tax": 0.3,
+"deletion_mutation_tax": 0.08,
+"tournament": 4,
+"lower_range": 10,
+"upper_range": 30,
+"d_connection": 2
+}
