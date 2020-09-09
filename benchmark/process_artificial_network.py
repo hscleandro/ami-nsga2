@@ -64,16 +64,6 @@ if __name__ == '__main__':
     f = open(json_load)
     data = json.load(f)
 
-#    output = '/home/leandro/workspace/features/Leandro/code/aminsga2/benchmark/output/'
-#    network_size = 1000
-#    nb_modules = 1
-#    module_size = 10
-#    prob_p = 0.01
-#    prob_q = 0.90
-#    removed_edges = 0.0
-#    initial_module = 2
-#    ctr = 1
-
     if arg.initial_module == 0:
         ## Simulation based in the extraction of modules in the real STRING network
         # Number of vertex extracted from STRING
@@ -84,8 +74,6 @@ if __name__ == '__main__':
         predit_model = LinearRegression()
         predit_model.fit(x, y)
         y_pred = predit_model.predict(np.array([arg.network_size]).reshape((-1, 1)))
-#       y_pred = predit_model.predict(np.array([network_size]).reshape((-1, 1)))
-        initial_module = int(round(y_pred[0]))
     else:
         initial_module = arg.initial_module
 
@@ -93,9 +81,7 @@ if __name__ == '__main__':
 
     if arg.outfile:
         str_date = datetime.today().isoformat('_')
-        #outfile = open(str(output + "result_" + str_date + ".csv"), 'w')
         outfile = open(str(arg.outfile + "result_" + str_date + ".csv"), 'w')
-        ### mudar aqui
 
         initial_head = "#graph, real_size, active_module_size, rate_connection, average_shortest_paths"
         if 'bionet' in data['tools']:
@@ -126,14 +112,6 @@ if __name__ == '__main__':
                                                    arg.removed_edges,
                                                    rng)
 
-#                G = Datasets.get_scale_free_graph_edge(network_size,
-#                                                       initial_module,
-#                                                       nb_modules,
-#                                                       module_size,
-#                                                       prob_p,
-#                                                       prob_q,
-#                                                       removed_edges,
-#                                                       rng)
 
         rate_conection = len(G.edges)/len(G.nodes)
 
@@ -141,7 +119,6 @@ if __name__ == '__main__':
         for _, cluster in Datasets.get_groups(G).items():
             nodes = list(cluster)
             average_shortest_paths.append(Scores.average_shortest_path(G, nodes))
-        #graph, real_size, rate_connection, average_shortest_paths
         result = str(ctr) +","+ str(arg.network_size)+","+ str(arg.module_size) +","+ str(rate_conection) +","+ str(average_shortest_paths[0])
         # save the network and the simulation transcripts in the file
         network_path, weight_path = write_network_edge_list(G, arg.outfile, "sim" + str(ctr + 1))
@@ -251,7 +228,6 @@ if __name__ == '__main__':
             str(runtime_baseline)
 
         if arg.outfile:
-            ### Esse 'outline' eh uma concatenacao dos resultados
             outfile.write("".join(result) + "\n")
             outfile.flush()
 #
