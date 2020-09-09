@@ -7,7 +7,7 @@
 
     The structure of the artificial networks used in this benchmark is done using as  
     reference the study of (Barabási, 2000).  
-    The parameters bellow Can be defined by the user.
+    The parameters bellow can be defined by the user.
 
     Density [-i];
     Network size[-s]; 
@@ -20,7 +20,7 @@
     Use the parameter m = 0 to execute a network structure based in real biological STRING dabase 
     (combined_score > 700 and cooexpression > 0) from a approximation using linear regression.
 
-    The signal variation of the simulated genes was calculated using the same strategy as the study
+    The signal variation of the simulated genes is calculated using the same strategy as the study
     made by (Robinson, 2017).
 
     Four other state-of-the-art strategies (Bionet, GIGA, COSINE, Knode), as well as the baseline 
