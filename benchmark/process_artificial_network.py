@@ -5,7 +5,7 @@
 """
     Script used for comparison (benchmark) between the tools for identification of active modules. 
 
-    The structure of the artificial networks used in this benchmark is made using as  
+    The structure of the artificial networks used in this benchmark is done using as  
     reference the study of (Barabási, 2000).  
     The parameters bellow Can be defined by the user.
 
