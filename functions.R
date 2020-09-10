@@ -8,13 +8,14 @@
 #
 #===================================================================================================
 #source("packages.R")
+
 library(igraph)       
 library(dplyr)
 library(mco)
 library(nsga2R)
 library(igraph)
-library(visNetwork)
 library(magrittr)
+#library(visNetwork)
 
 # --- AMINSGA-II --- #
 
@@ -37,7 +38,7 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
     ## Evolutionary operators ####
     cat("\nCalculating Crossoover and mutation...\n")
     newpopulation <- NULL; crloop <- TRUE; eoerr <- 1; maxError <- 500
-    #faill <- 1; okk <- 1
+
     ## choosing father and mother ####
     while(crloop){
       ## select father and mother in the population ####
@@ -57,13 +58,7 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
         child[which(names(child) %in% module_child)] <- 1 
         ## join the child in the population
         newpopulation <- rbind(newpopulation,child)  
-        #cat(okk,": OK\n")
-        #okk <- okk + 1
-      }else{
-        eoerr <- eoerr + 1
-        #cat(faill,": FAIL\n")
-        #faill <- faill + 1
-      }
+      }else{ eoerr <- eoerr + 1  }
 
       if(!is.null(newpopulation)){
         ## verifying if the number of children is sufficient to compose the new generation ####
@@ -75,8 +70,6 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
         break
       }
     }
-    
-    #cat("Fails:",eoerr,"\n")
     rownames(newpopulation) <- NULL
     number_of_springs[generation] <- nrow(newpopulation)
       
@@ -95,16 +88,13 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
     cat("[OK]\n")
     
     ##  Note the indicator of the objectives #### 
-    mean1[generation] <- mean(objective[,1])
-    mean2[generation] <- mean(objective[,2])
-    var1[generation] <- var(objective[,1]) 
-    var2[generation] <- var(objective[,2])
-    st1[generation] <- sd(objective[,1])
-    st2[generation] <- sd(objective[,2])
-    max1[generation] <- max(objective[,1])
-    max2[generation] <- max(objective[,2])
+    mean1[generation] <- mean(objective[,1]); mean2[generation] <- mean(objective[,2])
+    var1[generation] <- var(objective[,1]); var2[generation] <- var(objective[,2])
+    st1[generation] <- sd(objective[,1]); st2[generation] <- sd(objective[,2])
+    max1[generation] <- max(objective[,1]); max2[generation] <- max(objective[,2])
     
-    ## identifying the rank index of each pareto front #### 
+    ## Identifying the rank index of each Pareto Front #### 
+    ## Transforming into a maximization problem
     objective <- objective * (-1)
     ranking <- fastNonDominatedSorting(objective)
     rnkIndex <- integer(nrow(population))
@@ -127,8 +117,7 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
     ## Choosing the best individuals per tournament #### 
     matingPool <- tournamentSelection(index_pop,nrow(population),tournament)
     matingPool <- as.data.frame(matingPool)
-    ord <- order(matingPool$rnkIndex)
-    matingPool <- matingPool[ord,]
+    matingPool <- matingPool[order(matingPool$rnkIndex),]
     matingPool <- matingPool[1:population_size,]
     
     ## Update the population 
@@ -144,8 +133,7 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
       len <- c(len,temp)
     }
     info_table <- matingPool[index,c("za","nest","rnkIndex")]
-    indexes <- 1:nrow(info_table)
-    info_table <- cbind(indexes,info_table)
+    info_table <- cbind(1:nrow(info_table),info_table)
     info_table$za <- info_table$za * -1
     info_table$nest <- info_table$nest * -1
     rownames(info_table) <- 1:nrow(info_table)
@@ -176,7 +164,6 @@ aminsga2 <- function(G, population_size, offspring_size, number_of_generations,
     cat("generation:",generation,"\n")
     generation <- generation + 1
   }
-  
   
   output_list <- list()
   
@@ -275,9 +262,6 @@ crossover <-  function(G,P1,P2,d){
   if(size1 == 0){size1 <- 1}
   size2 <- round(length(P2) * (1-r))
   if(size2 == 0){size2 <- 1}
-  #cat("cutoff1:",cutoff1,"\n")
-  #cat("size1",size1,"\n")
-  #cat("size2",size2,"\n")
   subnetwork1 <- expandSubnetworkFromSeed(G,cutoff1,P1,size1,d)
   if(length(intersection) > 0){
     cutoff2 <- intersect(subnetwork1,P2)
@@ -362,8 +346,6 @@ getObjectives <- function(cromossome, ppi, k = c(10,20)){
     ## calculating the mean expression of neighbors of each vertice in the module as in NEST - Jiang P., et all (2015)
     nexp <- NULL
     for(ind in 1:len){
-      #temp <- neighbors(ppi_mod,module[ind])
-      #temp <- neighbors(ppi,module[ind])
       neighborss <- setdiff(names(unlist(neighborhood(ppi, order = 1, nodes = as.character(module[ind])))),as.character(module[ind]))
       index <- which(V(ppi)$name %in% neighborss)
       z_score <- 1 - V(ppi)$fc[index]
@@ -457,7 +439,6 @@ minMax <- function(vet, min=0, max=1){
 shortest_pathways <- function(ppi,P1,P2){
   shortest_paths <- NULL
   for(p in P1){
-    #cat("p:",p,", p2:",p2)
     aux <- get.shortest.paths(ppi,from = as.character(p), to = as.character(P2), mode = "all")$vpath
     shortest_paths <- c(shortest_paths,aux)
   }
@@ -483,140 +464,27 @@ isempty <- function(verify){
   }
 }
 
-makePlot <- function(t1,t2,index){
-  generation <- 1:length(t1)
-  
-  ## add extra space to right margin of plot within frame
-  par(mar=c(5, 4, 4, 6) + 0.1)
-  
-  ## Plot first set of data and draw its axis
-  plot(generation, t1, pch=16, axes=FALSE, ylim=c(0,max(t1)), xlab="", ylab="", 
-       type="b",col="black", main=index)
-  axis(2, ylim=c(0,max(t1)),col="black",las=1)  ## las=1 makes horizontal labels
-  mtext(paste0(index,"1"),side=2,line=2.5)
-  box()
-  
-  ## Allow a second plot on the same graph
-  par(new=TRUE)
-  
-  ## Plot the second plot and put axis scale on right
-  plot(generation, t2, pch=15,  xlab="", ylab="", ylim=c(0,max(t2)), 
-       axes=FALSE, type="b", col="red")
-  ## a little farther out (line=4) to make room for labels
-  mtext(paste0(index,"2"),side=4,col="red",line=4) 
-  axis(4, ylim=c(0,max(t2)), col="red",col.axis="red",las=1)
-  
-  ## Draw the time axis
-  axis(1,pretty(range(generation,1)))
-  mtext("Generation",side=1,col="black",line=2.5)  
-  
-  ## Add Legend
-  legend("topleft",legend=c(paste0(index,"1"),paste0(index,"2")),
-         text.col=c("black","red"),pch=c(16,15),col=c("black","red"))
-}
-
-identify_clusters <- function(ppi,truehits){
-  #neighbors_ind <- neighborhood(ppi, order = 2,nodes = truehits)
-  neighbors_ind <- neighborhood(ppi, order = 2,nodes = as.character(truehits))
-  neighbors_ind <- unique(names(unlist(neighbors_ind)))
-  
-  ppi2 <- induced.subgraph(graph=ppi,vids=neighbors_ind)
-  # Exclude vertices (degree = 1) not belong to parent1+parent2
-  cont <- TRUE
-  while(cont == TRUE){
-    deg <- degree(ppi2,mode = "out")
-    index_deg <- which(deg == 1)
-    index_ex <- which(names(deg[index_deg]) %!in% truehits)
-    remov <- names(deg[index_deg])[index_ex]
-    if(length(remov) > 0){
-      ppi2 <- delete_vertices(ppi2, as.character(remov))
-      
-    }
-    else{
-      cont <- FALSE
-    }
-  }
-  index <- which(V(ppi2)$name %!in% truehits)
-  not_individual <- V(ppi2)$name[index]
-  n <- 1; remov <- NULL
-  for(ni in not_individual){
-    ni_neighbors <- names(neighbors(ppi2,v = as.character(ni),mode = "out"))
-    ni_ind <- length(which(ni_neighbors %in% truehits))
-    size_niNeig <- length(ni_neighbors)
-    if(ni_ind <= (size_niNeig - ni_ind)){
-      remov[n] <- ni
-      n <- n+1
-    }
-  }
-  ppi3 <- delete_vertices(ppi2, as.character(remov))
-  #plot_g(ppi3,truehits)
-  deg <- which(degree(ppi3) %in% 0)
-  returnn <- NULL
-  if(length(deg) > 0){
-    for(dg in deg){
-      nme <- names(degree(ppi3)[dg])
-      thits <- setdiff(truehits,nme)
-      x <- 1; stp <- FALSE
-      while(stp == FALSE){
-        ntarget <- setdiff(names(unlist(neighborhood(ppi2,nme,order = x))),nme)
-        ntrue <- names(unlist(neighborhood(ppi2,as.character(thits),order = x)))
-        int_true <- intersect(ntrue,ntarget)
-        if(length(int_true)>0){
-          stp <- TRUE
-        }
-        x <- x + 1
-      }
-      returnn <- c(returnn,int_true)
-    }
-  }
-  if(!is.null(returnn)){
-    remov <- setdiff(remov,returnn)
-    ppi2 <- delete_vertices(ppi2, as.character(remov))
-  }
-  else{
-    ppi2 <- ppi3
-  }
-  strong_c <- components(ppi2, mode = "strong")
-  if(strong_c$no != 3){
-    for(rt in returnn){
-      if(length(which(V(ppi2)$name %in% rt)) > 0){
-        test <- names(neighbors(ppi2,as.character(rt)))
-        if(length(which(test %in% truehits)) == 0){
-          ppi2 <- delete_vertices(ppi2, rt)
-        }
-      }
-    }
-    strong_c <- components(ppi2, mode = "strong")
-  }
-  retur <- list()
-  retur[[1]] <- strong_c$membership
-  retur[[2]] <- ppi2
-  
-  return(retur)
-}
-
-plot_gg <- function(gp, ind_1, ind_2){ #######
-  col <- rep("#e5e5ff",length(V(gp)))
-  col[which(V(gp)$name %in% ind_1)] <- "#cf1b3c"
-  col[which(V(gp)$name %in% ind_2)] <- "#0000ff"
-  intesc <- intersect(ind_1,ind_2)
-  if(length(intesc) > 0){
-    col[which(V(gp)$name %in% intesc)] <- "#ff6600"
-  }
-  V(gp)$color <- col
-  E(gp)$color <- "silver"
-
-  dat <- toVisNetworkData(gp)
-  nodes_path <- dat[[1]]
-  edges_path <- dat[[2]]
-
-  visNetwork(nodes_path, edges_path,
-             main = "Interactive Network - STRING") %>%
-    visOptions(selectedBy = "color",
-               nodesIdSelection = list(enabled = TRUE), #TRUE,
-               highlightNearest = list(enabled = TRUE, degree = 1,
-                                       hover = FALSE)) %>%
-    #visPhysics(solver = "forceAtlas2Based", forceAtlas2Based = list(gravitationalConstant = -10)) #%>%
-    visIgraphLayout()
-} #######
+# plot_gg <- function(gp, ind_1, ind_2){ 
+#   col <- rep("#e5e5ff",length(V(gp)))
+#   col[which(V(gp)$name %in% ind_1)] <- "#cf1b3c"
+#   col[which(V(gp)$name %in% ind_2)] <- "#0000ff"
+#   intesc <- intersect(ind_1,ind_2)
+#   if(length(intesc) > 0){
+#     col[which(V(gp)$name %in% intesc)] <- "#ff6600"
+#   }
+#   V(gp)$color <- col
+#   E(gp)$color <- "silver"
+# 
+#   dat <- toVisNetworkData(gp)
+#   nodes_path <- dat[[1]]
+#   edges_path <- dat[[2]]
+# 
+#   visNetwork(nodes_path, edges_path,
+#              main = "Interactive Network - STRING") %>%
+#     visOptions(selectedBy = "color",
+#                nodesIdSelection = list(enabled = TRUE), #TRUE,
+#                highlightNearest = list(enabled = TRUE, degree = 1,
+#                                        hover = FALSE)) %>%
+#     visIgraphLayout()
+# }
 

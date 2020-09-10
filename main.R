@@ -9,14 +9,17 @@
 #===================================================================================================
 library(jsonlite)
 
-#LOCAL_DIR = '/home/leandro/workspace/aminsga2/'
+#LOCAL_DIR = '~/aminsga2/'
 #input <- try(fromJSON(file = paste0(LOCAL_DIR,"config.json")))
-source(paste0(LOCAL_DIR,"functions.R"))
 
-#OUTPUT_PATH <- '/home/leandro/workspace/features/Leandro/code/aminsga2/benchmark/output/'
-#NETWORK_PATH <- '/home/leandro/workspace/features/Leandro/code/aminsga2/benchmark/output/sim10_connection_list.edgelist'
-#WEIGHT_PATH <- '/home/leandro/workspace/features/Leandro/code/aminsga2/benchmark/output/sim10_weight.csv'
-#HIT_PATH <- '/home/leandro/workspace/features/Leandro/code/aminsga2/benchmark/output/sim2_hittrue.csv'
+#OUTPUT_PATH <- '~/aminsga2/benchmark/output/'
+#NETWORK_PATH <- '~/aminsga2/benchmark/output/sim1_connection_list.edgelist'
+#WEIGHT_PATH <- '~/aminsga2/benchmark/output/sim1_weight.csv'
+#HIT_PATH <- '~/aminsga2/benchmark/output/sim1_hittrue.csv'
+
+#TEST = TRUE
+
+source(paste0(LOCAL_DIR,"functions.R"))
 
 if(input$lower_range > input$upper_range){
   cat("\n\n")

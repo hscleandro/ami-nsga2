@@ -7,6 +7,8 @@
 #
 #===================================================================================================
 
+## Packages needed to run the AMINSGA2 tool
+
 if("igraph" %in% rownames(installed.packages()) == FALSE) {
   cat("\nInstalling igraph R package...\n")
   install.packages("igraph")
@@ -27,11 +29,15 @@ if("nsga2R" %in% rownames(installed.packages()) == FALSE) {
   cat("\nInstalling nsga2R R package...\n")
   install.packages("nsga2R")
 }
-## For teste Robinson 2017 simulated dataset
-# if("R.matlab" %in% rownames(installed.packages()) == FALSE) {
-#   cat("\nInstalling R.matlab R package...\n")
-#   install.packages("R.matlab")
-# }
+if("jsonlite" %in% rownames(installed.packages()) == FALSE) {
+  if (!requireNamespace("jsonlite", quietly = TRUE))
+    install.packages("jsonlite")
+}
+if("rsjon" %in% rownames(installed.packages()) == FALSE) {
+  if (!requireNamespace("rsjon", quietly = TRUE))
+    install.packages("rsjon")
+}
+
 ## For plot network
 # if("visNetwork" %in% rownames(installed.packages()) == FALSE) {
 #   cat("\nInstalling R.matlab R package...\n")
