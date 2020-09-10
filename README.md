@@ -18,7 +18,7 @@ This document is about the evolutionary algorithm (EA) for the identification of
 * R version >= 3.2.1.
 
 ## Installation
-Install the R dependences exectuing the script packages.R
+Install the R dependences execuTing the script packages.R
 
 ## Input files
 AMI-NSGA2 supports two types of files: (1) network structure represented by a list of edges or adjacency matrix; (2) A weight-list of differentially expressed genes and their corresponding statistics. In the benchmark/output there are two files containing examples of an interaction network (sim1_connection_list.edgelist) and a weight-list of genes (sim1_weight.csv) in addition to a file containing the simulated artificial active module in this network (sim1_hittrue.csv). 
@@ -67,5 +67,5 @@ This project is licensed under the GNU general public licence - see the [LICENSE
 
 ## Acknowledgments
 
-* CNRS [CNRS](http://http://www.cnrs.fr/)
-* I3S [I3S](https://www.i3s.unice.fr/en)
+* Centre national de la recherche scientifique [CNRS](http://http://www.cnrs.fr/)
+* Laboratoire d'Informatique, Signaux et Systèmes de Sophia Antipolis [I3S](https://www.i3s.unice.fr/en)
