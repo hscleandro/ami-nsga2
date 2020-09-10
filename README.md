@@ -69,7 +69,7 @@ AMINSGA-2 version 1.0. Last edited: 10/09/2020
 * **Leandro Corrêa** - *developer, researcher, software architect* - [personal web page](https://hscleandro.wixsite.com/professional)
 
 ## Publication
-Correa, Leandro et al. (2019). “Population-based meta-heuristic for active modules identification”. In:Proceedings of the Tenth International Conference on Computational Systems-Biology and Bioinformatics. Nice, France: International Institute of Informatics and Systemics, pp.1–8.
+Correa, Leandro et al. (2019). “Population-based meta-heuristic for active modules identification”. In: Proceedings of the Tenth International Conference on Computational Systems-Biology and Bioinformatics. Nice, France: International Institute of Informatics and Systemics, pp.1–8.
 
 ## License
 
