@@ -17,7 +17,7 @@
     Probability to add an edge between existing nodes [-p]; and 
     Probability value of rewiring of existing edges [-q]
 
-    Use the parameter m = 0 to execute a network structure based in real biological STRING dabase 
+    Use the parameter i = 0 to execute a network structure based in real biological STRING dabase 
     (combined_score > 700 and cooexpression > 0) from a approximation using linear regression.
 
     The signal variation of the simulated genes is calculated using the same strategy as the study
@@ -113,6 +113,7 @@ if __name__ == '__main__':
         predit_model = LinearRegression()
         predit_model.fit(x, y)
         y_pred = predit_model.predict(np.array([arg.network_size]).reshape((-1, 1)))
+        initial_module = int(round(y_pred[0]))
     else:
         initial_module = arg.initial_module
 
