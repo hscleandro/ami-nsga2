@@ -62,7 +62,7 @@ Rscript aminsga2.R --help
 
 ## Versioning
 
-AMINSGA-2 version 1.0. Last edited: 10/09/2020
+AMINSGA-2 version 1.0. Last edited: 19/10/2020
 
 ## Authors
 
