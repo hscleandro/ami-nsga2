@@ -3,7 +3,7 @@
 # KNODE test using simulated data
 # This script is part of the tests used for the AMINSGA2 tool
 #
-# Copyright 2020 Leandro Corrêa @leandrohsc
+# Author: Leandro Corrêa @leandrohsc
 #
 #===================================================================================================
 if("dplyr" %in% rownames(installed.packages()) == FALSE) {
