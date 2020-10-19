@@ -1,5 +1,5 @@
 {
-"tools":["bionet", "giga", "knode", "aminsga2"],
+"tools":["bionet", "cosine", "giga", "knode", "aminsga2"],
 "cosine_n_iter":1,
 "cosine_popSize":100,
 "bionet_fdrs":0.8,
