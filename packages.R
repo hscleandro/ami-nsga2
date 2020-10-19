@@ -3,7 +3,7 @@
 # AMINSGA2: Detect Active Modules using Multi-Objective Evolutionary Algorithm
 #
 # V1.0 (2019-29-10) - R Packages Dependency List
-# Copyright 2019 Leandro Corrêa
+# Author: Leandro Corrêa
 #
 #===================================================================================================
 
