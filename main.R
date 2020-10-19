@@ -4,7 +4,7 @@
 # Publication: https://dl.acm.org/doi/10.1145/3365953.3365957
 #
 # V1.0 (2020-09-09) 
-# Copyright 2020 Leandro Corrêa @leandrohsc
+# Author: Leandro Corrêa @leandrohsc
 #
 #===================================================================================================
 library(jsonlite)
