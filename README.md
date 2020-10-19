@@ -73,7 +73,7 @@ Correa, Leandro et al. (2019). “Population-based meta-heuristic for active mod
 
 ## License
 
-This project is licensed under the GNU general public licence - see the [LICENSE](https://github.com/hscleandro/AMINSGA2/LICENSE) file for details
+This project is licensed under the GNU general public licence - see the [LICENSE](https://github.com/hscleandro/ami-nsga2/blob/master/LICENSE) file for details
 
 ## Acknowledgments
 
