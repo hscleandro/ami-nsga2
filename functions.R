@@ -403,10 +403,10 @@ groupingParetoSolutions <- function(result, G, d, MAX){
   set_Q <- NULL
   maxsize <- 0
   for(i in 1:nrow(info_table)){
-    set_Q <- names(which(results$population[info_table[i,"indexes"],] == 1))
+    set_Q <- names(which(results$population[info_table[i,1],] == 1))
     count <- 1
     for(j in i:nrow(info_table)){
-      q <- names(which(results$population[info_table[j,"indexes"],] == 1))
+      q <- names(which(results$population[info_table[j,1],] == 1))
       if(length(union(set_Q, q)) < MAX){
         if(IsDconnected(G,union(set_Q, q),d)){
           set_Q <- union(set_Q, q)

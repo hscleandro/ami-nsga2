@@ -50,8 +50,6 @@ import networkx as nx
 import os
 import json
 
-import networkx as nx
-
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--nbruns', dest='number_of_runs', type=int, required=False, default=1000, help="specifies the number of runs (default=1000)")

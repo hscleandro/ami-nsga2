@@ -11,6 +11,9 @@ if("dplyr" %in% rownames(installed.packages()) == FALSE) {
   install.packages("dplyr")
 }
 if("SANTA" %in% rownames(installed.packages()) == FALSE) {
+  if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+  library(BiocManager)
   cat("\nInstalling SANTA R package...\n")
   BiocManager::install("SANTA")
 }

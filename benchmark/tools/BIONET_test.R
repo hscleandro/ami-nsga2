@@ -14,14 +14,14 @@
 if("BioNet" %in% rownames(installed.packages()) == FALSE) {
   if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-  
+  library(BiocManager)
   BiocManager::install("BioNet")
 }
 if("RBGL" %in% rownames(installed.packages()) == FALSE) {
   if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-  
-  BiocManager::install("BioNet")
+  library(BiocManager)
+  BiocManager::install("RBGL")
 }
 if("igraph" %in% rownames(installed.packages()) == FALSE) {
     install.packages("igraph")

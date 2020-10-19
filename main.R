@@ -95,7 +95,7 @@ results <- aminsga2(G = ppi,
                     variation = variation)
 
 cat("\n\n## Identifying the best grouping Pareto combination.\n")
-final_module <- groupingParetoSolutions(result, ppi, input$d_connection, variation[2])
+final_module <- groupingParetoSolutions(results, ppi, input$d_connection, variation[2])
 
 if(TEST){
   selected <- weight$V1[as.numeric(final_module)]
