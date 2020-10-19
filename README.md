@@ -79,3 +79,4 @@ This project is licensed under the GNU general public licence - see the [LICENSE
 
 * Centre national de la recherche scientifique [CNRS](http://http://www.cnrs.fr/)
 * Laboratoire d'Informatique, Signaux et Systèmes de Sophia Antipolis [I3S](https://www.i3s.unice.fr/en)
+* Université Côte d'Azur [UCA](https://univ-cotedazur.fr/)
